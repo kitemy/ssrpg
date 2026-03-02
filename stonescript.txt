@@ -1,34 +1,36 @@
 // ATTACK ANIMATION CANCEL
 ?item.left.state = 3
- equipL *0 wand
- equipL @item.left@
+  equipL trisk
+  equipL @item.left@
 ?item.right.state = 3
- ?time % 2
-  equipR throw
- :
-  equipR *0 shield
- equip @item.right@
+  ?totaltime % 2 = 0
+   equipR throw
+  :
+   equipR trisk
+  equip @item.right@
+
+// UTYARA
+var u = import utils
+var rel = import reload
+var kb = import kb
 
 // DEADWOOD CANYON
 ?loc = deadwood
- ?loopcount = 0 & loc.stars ! 5
-  equipL triskel
+ ?loopcount = 0
+  equipL trisk
   equipR cult_mask
   ?item.potion = berserk
   ^& item.CanActivate()
    activate potion
   :?foe = "phase1" & ai.enabled
    ?foe.distance >= 11 & foe.distance <= 16
-    ?item.GetCooldown(＂bash＂) <= 0
-     equip bash
-    :?item.GetCooldown(＂dash＂) <= 0
-     equip dash
+    dashin()
    :?foe.distance <= 6
     equip stone staff
   :?foe = "phase2"
    ?foe.state = 32 & foe.time >= 44
    ^& item.CanActivate()
-   ^&item.GetCooldown(＂wand_ice＂) <= 0
+   ^& item.GetCooldown(＂wand_ice＂) <= 0
     equipL frost wand
     activate L
    :?foe.distance <= 10
@@ -59,7 +61,7 @@
   activate R
  :?foe.distance >= 11 & foe.distance <= 16
  ^& ai.enabled
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -128,7 +130,7 @@
    equipR compound
  :?foe.distance >= 11 & foe.distance <= 16
  ^& foe.count <= 4
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -180,7 +182,7 @@
   equipL trisk
   equipR compound
  :?foe.distance >= 11 & foe.distance <= 16
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -215,7 +217,7 @@
   equipL reset
   equipR D vigor wand
  :?foe.distance >= 11 & foe.distance <= 16
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -251,7 +253,7 @@
    equipR compound
  :?foe.distance >= 11 & foe.distance <= 16
  ^& (foe = elemental | foe = cart)
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -286,7 +288,7 @@
   equip quarterstaff
   activate R
  :?foe.distance >= 11 & foe.distance <= 16
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -327,7 +329,7 @@
    equipR compound
  :?foe.distance >= 11 & foe.distance <= 16
  ^& ai.enabled = True & foe ! scout
-  ?item.GetCooldown(＂bash＂) <= 0
+  ?item.GetCooldown(") <="0
    equip bash
   :?item.GetCooldown(＂dash＂) <= 0
    equip dash
@@ -398,4 +400,71 @@ import Pets/CatBalloon
 var freeChest = import UI/FreeChestTracker
 freeChest.Main()
 
+var orange
+orange = #ffa500
+
+ // Scarf Color
 import Cosmetics/WavyScarf
+var Scarf = import Cosmetics/WavyScarf
+
+var gpwr
+gpwr = (item.right.gp-11)/2
+
+?gpwr = 0
+ Scarf.scarfColor = #white
+:?gpwr = 1
+ Scarf.scarfColor = #cyan
+:?gpwr >= 2 & gpwr <= 3
+ Scarf.scarfColor = #yellow
+:?gpwr >= 4 & gpwr <= 6
+ Scarf.scarfColor = #green
+:?gpwr >= 7 & gpwr <= 10
+ Scarf.scarfColor = #blue
+:?gpwr >= 11 & gpwr <= 15
+ Scarf.scarfColor = #red
+:?gpwr >= 16
+ Scarf.scarfColor = #rain
+Scarf.ScarfMain()
+
+>o-2,-2,#rainFF,kitemy
+
+// LABELS
+>`0,0,foe: @foe.name@
+>`0,1,foe.dist: @foe.distance@
+>`0,2,foe.time: @foe.time@
+>`0,3,foe.state: @foe.state@
+>`0,4,foe.count: @foe.GetCount
+^(69-screen.FromWorldX(pos.x))@
+>`0,5,#rain,fps:@
+
+?item.potion = empty
+ >`0,6,pot: consumed
+:
+ >`0,6,pot: @item.potion@
+
+>`0,7,loc: @loc.name@ @loc.stars@*
+>`0,8,screen: @screen.i@
+>`0,9,loopcount: @loopcount@
+>`0,10,#rain,debuffs:@debuffs.string@
+>`0,11,#rain,buffs:@buffs.string@
+
+var tFD
+tFD = time.FormatDigital
+
+?totaltime < loc.bestTime
+ >`0,12,#green,time: 
+^@tFD(totaltime)@/@totaltime@f
+:?totaltime < loc.averageTime
+ >`0,12,#yellow,time: 
+^@tFD(totaltime)@/@totaltime@f
+:
+ >`0,12,#red,time: 
+^@tFD(totaltime)@/@totaltime@f
+
+>`0,13,#rain,b.run: 
+^@tFD(loc.bestTime)@/@loc.bestTime@f
+
+>`0,14,@orange@,avg: 
+^@tFD(loc.averageTime)@/@loc.averageTime@f
+
+>`0,15,#rain,by: @player.name@

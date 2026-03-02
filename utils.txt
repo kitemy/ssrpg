@@ -125,7 +125,7 @@ func QuarterUse()
       equip quarterstaff shiny *0 +0
     :
       equip quarterstaff shiny *0
-    activate r
+    activate R
 
 func maskound()
   ?armor >= 35
@@ -202,7 +202,6 @@ func alternation(items)
   :
     equipR hatchet
     equipL triskelion
-
 
 func get_berserk_pot_duration()
   ?buffs.string

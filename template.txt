@@ -39,8 +39,8 @@ u.updateAll() // update needed variables, use this !once!
   :?some other needed things
     ...
   :?pickup.distance < 10
-    equipR star
     equipL trisk
+    equipR star
   :?foe.distance > 16
     u.QuarterUse()
     // some logic

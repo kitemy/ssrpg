@@ -239,6 +239,9 @@ FoeState(22,1,3,purp,green,orange)
 locdisp(26,1,purp,green)
 //resdisp()
 
+disable banner
+disable npcDialog
+
 /*
 ?ai.idle
   border(green, ＂▓＂)
