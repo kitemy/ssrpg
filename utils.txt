@@ -14,10 +14,8 @@ func smoothcast(items)
     equipL trisk
 
 var loops = 0
-
 var old_t = item.GetTreasureCount()
 var enduse = 0
-
 var delay = 30
 var moon = 0
 var moondialTimer = 0
@@ -184,7 +182,6 @@ func useInfernalPot()
     equip staff_hidden_fire
     activate r
     inf_t = 0
-
 
 var alternate = 0
 func alternation(items)
