@@ -37,8 +37,7 @@ u.updateAll()
           equip stone staff
 :
   ?u.enduse > frames & u.loops % 2 = 0
-    ?u.CanUse("berserk")
-      activate potion
+    activate potion
   :?pickup.distance < 10
     equipL trisk
     equipR star
