@@ -25,7 +25,7 @@ u.updateAll()
       equipL grap
       equipR mask
     :
-      ?foe = "phase1" & foe.distance <= 20
+      ?foe = "phase1"
         equip stone staff
       :?foe = "phase2"
         ?foe.state = 32 & foe.time >= 44
@@ -37,9 +37,8 @@ u.updateAll()
           equip stone staff
 :
   ?u.enduse > frames & u.loops % 2 = 0
-    ?u.CanUse("staff_fire") & armor*10+armor.f>60
-      equip staff_hidden_fire
-      activate r
+    ?u.CanUse("berserk")
+      activate potion
   :?pickup.distance < 10
     equipL trisk
     equipR star
@@ -77,7 +76,7 @@ u.updateAll()
           :?u.CanUse("heavy_hammer")
             equip heavy_hammer
             activate R
-          :?u.CanUse("cultist_mask")
+          :?u.CanUse("mask")
             equip cultist_mask
             activate R
           :?foe = "phase1"
@@ -89,7 +88,7 @@ u.updateAll()
             :?foe.distance <= 10
               equip stone staff
           :?foe = "phase2"
-            ?foe.state = 32 & u.canUse("wand_ice")
+            ?foe.state = 32 & u.CanUse("wand_ice")
               equipL frost wand
               activate L
             :
