@@ -31,11 +31,13 @@ u.updateAll()
         u.moonjuggling("dL vigor prismatic","dI ice shiny")
       :?foe = "phase2"
         ?foe.state = 32 & foe.time >= 44
-        ^& item.CanActivate()
-        ^& item.GetCooldown(＂wand_ice＂) <= 0
+        ^& u.CanUse("wand_ice")
           equipL frost wand
           activate L
-        :?foe.distance <= 10
+        :?u.CanUse("wand_vigor")
+          equipL vigor
+          activate L
+        :
           u.moonjuggling("dL vigor prismatic","dI ice shiny")
 :
   ?u.enduse > 50 & u.loops % 2 = 0
@@ -89,8 +91,12 @@ u.updateAll()
             :?foe.distance <= 10
               u.moonjuggling("dL vigor prismatic","dI ice shiny")
           :?foe = "phase2"
-            ?foe.state = 32 & u.CanUse("wand_ice")
+            ?foe.state = 32 & foe.time >= 44
+            ^& u.CanUse("wand_ice")
               equipL frost wand
+              activate L
+            :?u.CanUse("wand_vigor")
+              equipL vigor
               activate L
             :
               u.moonjuggling("dL vigor prismatic","dI ice shiny")
