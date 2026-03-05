@@ -37,9 +37,9 @@ u.updateAll()
         :
           u.moonjuggling("dL vigor prismatic","dI ice shiny")
 :
-  ?u.enduse > 50 & u.loops % 2 = 0
+  ?u.enduse > 30 & u.loops % 2 = 0
     activate potion
-    ?u.CanUse("staff_fire") & armor*10 + armor.f>60
+    ?u.CanUse("staff_fire")
       equip infernal
       activate R
   :?pickup.distance < 10
