@@ -34,7 +34,7 @@ u.updateAll()
         ^& u.CanUse("wand_ice")
           equipL frost wand
           activate L
-        :?u.CanUse("wand_vigor")
+        :?u.CanUse("wand_vigor") & ai.enabled
           equipL vigor
           activate L
         :
