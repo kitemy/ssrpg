@@ -30,13 +30,13 @@ u.updateAll()
       ?foe = "phase1"
         u.moonjuggling("dL vigor prismatic","dI ice shiny")
       :?foe = "phase2"
-        ?foe.state = 32 & foe.time >= 44
+        ?u.CanUse("wand_vigor")
+        ^& foe.buffs.string = "mirror"
+          equipL reset wand
+          activate L
+        :?foe.state = 32 & foe.time >= 44
         ^& u.CanUse("wand_ice")
           equipL frost wand
-          activate L
-        :?u.CanUse("wand_vigor") & foe.state = 2
-        ^& debuffs.count >= 1
-          equipL reset wand
           activate L
         :
           u.moonjuggling("dL vigor prismatic","dI ice shiny")
@@ -78,10 +78,10 @@ u.updateAll()
             equip bardiche
             activate R
           :?u.CanUse("heavy_hammer")
-            equip heavy_hammer
+            equip heavy hammer
             activate R
           :?u.CanUse("mask")
-            equip cultist_mask
+            equip mask
             activate R
         :?foe = "phase1"
           ?item.potion = berserk
