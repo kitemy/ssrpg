@@ -29,9 +29,9 @@ var dir = "https://raw.githubusercontent.com/
 
 sys.SetFileUrl(dir)
 
-var importUse = 0
+var importUse = 1
 ?importUse = 1
-  import UI/Timer
+  import Timer2
   import interface
   ?loc = deadwood
     ?loc.stars = 15

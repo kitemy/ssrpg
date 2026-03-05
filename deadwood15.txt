@@ -35,8 +35,8 @@ u.updateAll()
           equipL frost wand
           activate L
         :?u.CanUse("wand_vigor")
-        ^& foe.state = 2
-          equipL vigor
+        ^& foe.debuffs.string = "mirror"
+          equipL reset wand
           activate L
         :
           u.moonjuggling("dL vigor prismatic","dI ice shiny")
@@ -95,9 +95,6 @@ u.updateAll()
             ?foe.state = 32 & foe.time >= 44
             ^& u.CanUse("wand_ice")
               equipL frost wand
-              activate L
-            :?u.CanUse("wand_vigor")
-              equipL vigor
               activate L
             :
               u.moonjuggling("dL vigor prismatic","dI ice shiny")
