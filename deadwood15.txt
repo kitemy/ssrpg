@@ -4,7 +4,7 @@ u.updateAll()
 ?loc.begin
   brew wood + bronze
 
-?screen.i = 3 & u.loops % 2 = 0 & u.CanUse("blade")
+?screen.i = 2 & u.loops % 2 = 0 & u.CanUse("blade")
   u.BFG()
 :?u.loops = 0
   ?totaltime < 3
@@ -35,7 +35,7 @@ u.updateAll()
           equipL frost wand
           activate L
         :?u.CanUse("wand_vigor") & foe.state = 2
-        ^& foe.debuffs.string = "mirror"
+        ^& debuffs.count >= 1
           equipL reset wand
           activate L
         :
@@ -83,18 +83,18 @@ u.updateAll()
           :?u.CanUse("mask")
             equip cultist_mask
             activate R
-          :?foe = "phase1"
-            ?item.potion = berserk
-              activate potion
-            :?u.CanUse("staff_poison")
-              equip berserker
-                activate R
-            :?foe.distance <= 10
-              u.moonjuggling("dL vigor prismatic","dI ice shiny")
-          :?foe = "phase2"
-            ?foe.state = 32 & foe.time >= 44
-            ^& u.CanUse("wand_ice")
-              equipL frost wand
-              activate L
-            :
-              u.moonjuggling("dL vigor prismatic","dI ice shiny")
+        :?foe = "phase1"
+          ?item.potion = berserk
+            activate potion
+          :?u.CanUse("staff_poison")
+            equip berserker
+              activate R
+          :?foe.distance <= 10
+            u.moonjuggling("dL vigor prismatic","dI ice shiny")
+        :?foe = "phase2"
+          ?foe.state = 32 & foe.time >= 44
+          ^& u.CanUse("wand_ice")
+            equipL frost wand
+            activate L
+          :
+            u.moonjuggling("dL vigor prismatic","dI ice shiny")
