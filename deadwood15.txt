@@ -96,5 +96,5 @@ u.updateAll()
             activate L
           :
             u.moonjuggling("dL vigor prismatic","dI ice shiny")
-?item.potion ! empty & summon.count = 1
+?item.potion ! empty & summon.count = 1 & u.enduse = 0
   activate potion
